@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horarios - Servicio Universitario TIM</title>
+  
+  <!-- Tailwind CSS CDN para el diseño moderno -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    // Configuración corporativa de Tailwind (Nexo Studio 2026)
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            borgona: {
+              DEFAULT: '#722F37',
+              light: '#F5EAEB',
+              dark: '#5c242c',
+              deep: '#3a1116'
+            },
+            cordillera: '#333333'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    .transition-all-custom {
+      transition: all 0.3s ease;
+    }
+    /* Estilos del Modo de Alto Contraste */
+    .high-contrast {
+      background-color: #000000 !important;
+      color: #facc15 !important;
+    }
+    .high-contrast header {
+      background-color: #18181b !important;
+      border-color: #facc15 !important;
+    }
+    .high-contrast main, .high-contrast footer, .high-contrast section {
+      background-color: #000000 !important;
+      color: #facc15 !important;
+      border-color: #facc15 !important;
+    }
+    .high-contrast .text-neutral-500,
+    .high-contrast .text-neutral-600,
+    .high-contrast .text-neutral-700 {
+      color: #fef08a !important;
+    }
+    .high-contrast .bg-white, .high-contrast .bg-neutral-50, .high-contrast .bg-neutral-100 {
+      background-color: #18181b !important;
+      border: 1px solid #facc15 !important;
+      color: #facc15 !important;
+    }
+    .high-contrast button, .high-contrast a.nav-btn {
+      border: 1px solid #facc15 !important;
+    }
+    .high-contrast button:hover, .high-contrast a.nav-btn:hover {
+      background-color: #facc15 !important;
+      color: #000000 !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-neutral-800 font-sans min-h-screen transition-all-custom" id="body-container">
+
+  <!-- BARRA SUPERIOR DE ACCESIBILIDAD (ACCESO RÁPIDO) -->
+  <div class="bg-cordillera text-white py-2.5 px-4 text-xs md:text-sm flex flex-wrap justify-between items-center gap-2 border-b border-rose-900">
+    <div class="flex items-center space-x-2">
+      <!-- Icono Accesibilidad Nativo -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-rose-400 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1"/><path d="m5 8 3-3 5.5 3-2.36 3.5"/><path d="M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg>
+      <span class="font-semibold text-rose-300">MODO ACCESIBILIDAD WCAG 2.1:</span>
+    </div>
+    <div class="flex flex-wrap items-center gap-3">
+      <button onclick="toggleHighContrast()" class="bg-zinc-700 hover:bg-zinc-600 px-3 py-1 rounded font-bold transition-all" id="btn-contrast">
+        Alto Contraste ◑
+      </button>
+      <button onclick="toggleFontSize()" class="bg-zinc-700 hover:bg-zinc-600 px-3 py-1 rounded font-bold transition-all" id="btn-fontsize">
+        Texto Grande A+
+      </button>
+    </div>
+  </div>
+
+  <!-- ENCABEZADO / NAVBAR -->
+  <header class="bg-borgona text-white shadow-xl border-b-4 border-borgona-dark transition-all-custom" id="main-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-4">
+        <div class="bg-white p-2.5 rounded-xl shadow-inner flex items-center justify-center">
+          <!-- Icono Bus Nativo -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-borgona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/><path d="M13 6h-2"/><path d="M6 10h10"/><path d="M6 13h5"/></svg>
+        </div>
+        <div>
+          <div class="flex items-baseline space-x-2">
+            <span class="text-3xl font-extrabold tracking-tight">TIM</span>
+            <span class="text-xs font-semibold uppercase tracking-widest text-rose-200">Terminal Inteligente de Mendoza</span>
+          </div>
+          <p class="text-xs text-rose-100/90 font-medium">Nexo Studio — Conexión Federal</p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap justify-center gap-2">
+        <a href="index.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-white hover:bg-rose-800">Servicio</a>
+        <a href="paradas.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-white hover:bg-rose-800">Paradas</a>
+        <a href="recorrido.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-white hover:bg-rose-800">Recorrido</a>
+        <a href="horarios.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all bg-white text-borgona shadow-lg animate-pulse">Horarios</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DETALLE PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- BARRA LATERAL IZQUIERDA -->
+      <div class="lg:col-span-4 space-y-6">
+        <!-- FICHA TÉCNICA -->
+        <div class="p-6 rounded-2xl shadow-md bg-white border border-neutral-200 transition-all-custom" id="ficha-card">
+          <div class="flex items-center space-x-3 mb-4">
+            <!-- Icono Info Nativo -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-borgona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <h2 class="text-xl font-bold tracking-tight">Ficha del Servicio</h2>
+          </div>
+          <ul class="space-y-4 text-sm">
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Operador:</span>
+              <strong class="font-semibold text-right">Terminal Inteligente de Mendoza (TIM)</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Destino Central:</span>
+              <strong class="font-semibold text-borgona text-right">Ciudad Universitaria, CABA</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Distancia aproximada:</span>
+              <strong class="font-semibold text-right">1.085 km (Ruta Nacional 7)</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Tiempo de viaje:</span>
+              <strong class="font-semibold text-right">11 horas 49 minutos aprox.</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Frecuencia diaria:</span>
+              <strong class="font-semibold text-emerald-600 text-right">5 servicios al día</strong>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ASISTENCIA TELEFÓNICA -->
+        <div class="p-6 rounded-2xl shadow-md border-2 bg-rose-50 border-borgona/20 text-neutral-800" id="assistance-card">
+          <h3 class="font-black text-lg mb-2 flex items-center gap-2">
+            <!-- Icono Telefono Nativo -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-borgona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Asistencia TIM 24/7
+          </h3>
+          <p class="text-xs text-neutral-600 mb-4">
+            Si requerís asistencia prioritaria, rampas de abordaje especiales o ayuda visual al momento de abordar, podés comunicarte sin costo:
+          </p>
+          <a href="tel:02614765875" class="block text-center bg-borgona hover:bg-rose-800 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all shadow-md">
+            Llamar al: 0261 476-5875
+          </a>
+        </div>
+      </div>
+
+      <!-- CONTENIDO CENTRAL -->
+      <div class="lg:col-span-8">
+        <div class="p-6 md:p-8 rounded-2xl shadow-md space-y-6 bg-white border border-neutral-200">
+          <div class="flex items-center space-x-3 border-b pb-4">
+            <!-- Icono Reloj Nativo -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-borgona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight">4. Horarios y Frecuencias</h2>
+              <p class="text-sm text-neutral-500">Cronograma de partidas diarias (Lunes a Domingos)</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center justify-between" id="schedule-header">
+              <div>
+                <span class="text-xs font-bold text-emerald-800 uppercase tracking-widest block">Frecuencia General:</span>
+                <strong class="text-lg text-emerald-950 block">Un coche cada 5 horas</strong>
+              </div>
+              <span class="text-xs bg-emerald-600 text-white px-3 py-1 rounded-full font-bold">100% Puntual</span>
+            </div>
+
+            <!-- TABLA DE HORARIOS -->
+            <div class="overflow-x-auto rounded-xl border border-neutral-200 shadow-sm">
+              <table class="min-w-full divide-y divide-neutral-200">
+                <thead class="bg-neutral-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3.5 text-left text-xs font-bold text-neutral-500 uppercase tracking-wider">Servicio</th>
+                    <th scope="col" class="px-6 py-3.5 text-left text-xs font-bold text-neutral-500 uppercase tracking-wider">Hora de Salida</th>
+                    <th scope="col" class="px-6 py-3.5 text-left text-xs font-bold text-neutral-500 uppercase tracking-wider">Frecuencia</th>
+                    <th scope="col" class="px-6 py-3.5 text-left text-xs font-bold text-neutral-500 uppercase tracking-wider">Ubicación Andén</th>
+                    <th scope="col" class="px-6 py-3.5 text-left text-xs font-bold text-neutral-500 uppercase tracking-wider">Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-neutral-100 text-sm" id="schedule-tbody">
+                  <!-- Inyectado por Javascript de forma segura al cargar la página -->
+                </tbody>
+              </table>
+            </div>
+
+            <p class="text-xs text-neutral-400 italic">
+              * Los horarios de arribo previstos en Ciudad Universitaria son estimaciones sujetas al tráfico en el ingreso a la Capital Federal.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-cordillera text-white py-12 transition-all-custom" id="main-footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-zinc-800 pb-8">
+        <div class="space-y-3">
+          <div class="flex items-center space-x-2">
+            <!-- Icono Bus Nativo Footer -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/><path d="M13 6h-2"/><path d="M6 10h10"/><path d="M6 13h5"/></svg>
+            <span class="text-2xl font-black">TIM</span>
+          </div>
+          <p class="text-xs text-neutral-400">Terminal Inteligente de Mendoza. Sistema Integrado de Conectividad Nacional y Universitaria.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase tracking-wider text-rose-400 mb-4">Líneas de Servicio</h4>
+          <ul class="space-y-2 text-xs text-neutral-400">
+            <li>Línea 1: Larga Distancia</li>
+            <li>Línea 2: Alta Montaña</li>
+            <li>Línea 3: Ruta del Vino</li>
+            <li class="text-white font-semibold">Línea 5: Universitario (CABA)</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase tracking-wider text-rose-400 mb-4">Ubicación</h4>
+          <p class="text-xs text-neutral-400">Juan B. Alberdi s/n, Guaymallén, Mendoza, Argentina.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase tracking-wider text-rose-400 mb-4">Desarrollo</h4>
+          <p class="text-xs text-neutral-400">Nexo Studio — UADE 2026.</p>
+        </div>
+      </div>
+      <div class="pt-8 text-xs text-neutral-500 flex justify-between">
+        <p>© 2026 Terminal Inteligente de Mendoza (TIM).</p>
+        <p>Normas WCAG 2.1 AA</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Datos del itinerario
+    const horarios = [
+      { id: 1, hora: "00:00", estado: "Salido", anden: "Andén 7", plataforma: "Plataforma A" },
+      { id: 2, hora: "05:00", estado: "Salido", anden: "Andén 7", plataforma: "Plataforma A" },
+      { id: 3, hora: "10:00", estado: "A tiempo", anden: "Andén 7", plataforma: "Plataforma B" },
+      { id: 4, hora: "15:00", estado: "Programado", anden: "Andén 7", plataforma: "Plataforma B" },
+      { id: 5, hora: "20:00", estado: "Programado", anden: "Andén 7", plataforma: "Plataforma B" }
+    ];
+
+    let isHighContrast = false;
+    let isLargeFont = false;
+
+    // Inyección robusta y segura de datos
+    function renderHorariosTable() {
+      const tbody = document.getElementById('schedule-tbody');
+      if (!tbody) return;
+      
+      tbody.innerHTML = '';
+      
+      horarios.forEach(item => {
+        let statusBadgeClass = '';
+        if (item.estado === 'Salido') {
+          statusBadgeClass = 'bg-neutral-100 text-neutral-500';
+        } else if (item.estado === 'A tiempo') {
+          statusBadgeClass = 'bg-amber-100 text-amber-800 animate-pulse';
+        } else {
+          statusBadgeClass = 'bg-emerald-100 text-emerald-800';
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-neutral-50 transition-colors';
+        tr.innerHTML = `
+          <td class="px-6 py-4 font-bold text-borgona">Micro ${item.id}</td>
+          <td class="px-6 py-4 font-mono font-bold text-base">${item.hora} hs</td>
+          <td class="px-6 py-4 text-neutral-500">Cada 5 Horas</td>
+          <td class="px-6 py-4 text-neutral-700">${item.anden} - ${item.plataforma}</td>
+          <td class="px-6 py-4">
+            <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold ${statusBadgeClass}">
+              ${item.estado}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleHighContrast() {
+      isHighContrast = !isHighContrast;
+      const body = document.getElementById('body-container');
+      const btn = document.getElementById('btn-contrast');
+      if (!body || !btn) return;
+
+      if (isHighContrast) {
+        body.classList.add('high-contrast');
+        btn.innerText = "Normalizar Contraste";
+      } else {
+        body.classList.remove('high-contrast');
+        btn.innerText = "Alto Contraste ◑";
+      }
+    }
+
+    function toggleFontSize() {
+      isLargeFont = !isLargeFont;
+      const body = document.getElementById('body-container');
+      const btn = document.getElementById('btn-fontsize');
+      if (!body || !btn) return;
+
+      if (isLargeFont) {
+        body.classList.add('text-lg');
+        body.classList.remove('text-base');
+        btn.innerText = "Texto Normal";
+      } else {
+        body.classList.add('text-base');
+        body.classList.remove('text-lg');
+        btn.innerText = "Texto Grande A+";
+      }
+    }
+
+    // Inicialización inmediata y segura tras el parsing del DOM
+    document.addEventListener('DOMContentLoaded', function() {
+      renderHorariosTable();
+    });
+  </script>
+</body>
+</html>

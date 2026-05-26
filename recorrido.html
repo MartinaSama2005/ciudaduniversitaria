@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recorrido - Servicio Universitario TIM</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            borgona: {
+              DEFAULT: '#722F37',
+              light: '#F5EAEB',
+              dark: '#5c242c',
+              deep: '#3a1116'
+            },
+            cordillera: '#333333'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    .transition-all-custom {
+      transition: all 0.3s ease;
+    }
+    .high-contrast {
+      background-color: #000000 !important;
+      color: #facc15 !important;
+    }
+    .high-contrast header {
+      background-color: #18181b !important;
+      border-color: #facc15 !important;
+    }
+    .high-contrast main, .high-contrast footer, .high-contrast section {
+      background-color: #000000 !important;
+      color: #facc15 !important;
+      border-color: #facc15 !important;
+    }
+    .high-contrast .text-neutral-500,
+    .high-contrast .text-neutral-600,
+    .high-contrast .text-neutral-700 {
+      color: #fef08a !important;
+    }
+    .high-contrast .bg-white, .high-contrast .bg-neutral-50, .high-contrast .bg-neutral-100 {
+      background-color: #18181b !important;
+      border: 1px solid #facc15 !important;
+      color: #facc15 !important;
+    }
+    .high-contrast button, .high-contrast a.nav-btn {
+      border: 1px solid #facc15 !important;
+    }
+    .high-contrast button:hover, .high-contrast a.nav-btn:hover {
+      background-color: #facc15 !important;
+      color: #000000 !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-neutral-800 font-sans min-h-screen transition-all-custom" id="body-container">
+
+  <!-- BARRA SUPERIOR DE ACCESIBILIDAD -->
+  <div class="bg-cordillera text-white py-2.5 px-4 text-xs md:text-sm flex flex-wrap justify-between items-center gap-2 border-b border-rose-900">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="accessibility" class="h-4 w-4 text-rose-400"></i>
+      <span class="font-semibold text-rose-300">MODO ACCESIBILIDAD WCAG 2.1:</span>
+    </div>
+    <div class="flex flex-wrap items-center gap-3">
+      <button onclick="toggleHighContrast()" class="bg-zinc-700 hover:bg-zinc-600 px-3 py-1 rounded font-bold transition-all" id="btn-contrast">
+        Alto Contraste ◑
+      </button>
+      <button onclick="toggleFontSize()" class="bg-zinc-700 hover:bg-zinc-600 px-3 py-1 rounded font-bold transition-all" id="btn-fontsize">
+        Texto Grande A+
+      </button>
+    </div>
+  </div>
+
+  <!-- ENCABEZADO / NAVBAR -->
+  <header class="bg-borgona text-white shadow-xl border-b-4 border-borgona-dark transition-all-custom" id="main-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-4">
+        <div class="bg-white p-2.5 rounded-xl shadow-inner flex items-center justify-center">
+          <i data-lucide="bus" class="h-8 w-8 text-borgona"></i>
+        </div>
+        <div>
+          <div class="flex items-baseline space-x-2">
+            <span class="text-3xl font-extrabold tracking-tight">TIM</span>
+            <span class="text-xs font-semibold uppercase tracking-widest text-rose-200">Terminal Inteligente de Mendoza</span>
+          </div>
+          <p class="text-xs text-rose-100/90 font-medium">Nexo Studio — Conexión Federal</p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap justify-center gap-2">
+        <a href="index.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-white hover:bg-rose-800">Servicio</a>
+        <a href="paradas.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-white hover:bg-rose-800">Paradas</a>
+        <a href="recorrido.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all bg-white text-borgona shadow-lg">Recorrido</a>
+        <a href="horarios.html" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-white hover:bg-rose-800">Horarios</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DETALLE PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- BARRA LATERAL IZQUIERDA -->
+      <div class="lg:col-span-4 space-y-6">
+        <!-- FICHA TÉCNICA -->
+        <div class="p-6 rounded-2xl shadow-md bg-white border border-neutral-200 transition-all-custom" id="ficha-card">
+          <div class="flex items-center space-x-3 mb-4">
+            <i data-lucide="info" class="h-6 w-6 text-borgona"></i>
+            <h2 class="text-xl font-bold tracking-tight">Ficha del Servicio</h2>
+          </div>
+          <ul class="space-y-4 text-sm">
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Operador:</span>
+              <strong class="font-semibold text-right">Terminal Inteligente de Mendoza (TIM)</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Destino Central:</span>
+              <strong class="font-semibold text-borgona text-right">Ciudad Universitaria, CABA</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Distancia aproximada:</span>
+              <strong class="font-semibold text-right">1.085 km (Ruta Nacional 7)</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Tiempo de viaje:</span>
+              <strong class="font-semibold text-right">11 horas 49 minutos aprox.</strong>
+            </li>
+            <li class="flex justify-between items-center py-2 border-b border-neutral-100">
+              <span class="text-neutral-500">Frecuencia diaria:</span>
+              <strong class="font-semibold text-emerald-600 text-right">5 servicios al día</strong>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ASISTENCIA TELEFÓNICA -->
+        <div class="p-6 rounded-2xl shadow-md border-2 bg-rose-50 border-borgona/20 text-neutral-800" id="assistance-card">
+          <h3 class="font-black text-lg mb-2 flex items-center gap-2">
+            <i data-lucide="phone" class="h-5 w-5 text-borgona"></i>
+            Asistencia TIM 24/7
+          </h3>
+          <p class="text-xs text-neutral-600 mb-4">
+            Si requerís asistencia prioritaria, rampas de abordaje especiales o ayuda visual al momento de abordar, podés comunicarte sin costo:
+          </p>
+          <a href="tel:02614765875" class="block text-center bg-borgona hover:bg-rose-800 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition-all shadow-md">
+            Llamar al: 0261 476-5875
+          </a>
+        </div>
+      </div>
+
+      <!-- CONTENIDO CENTRAL -->
+      <div class="lg:col-span-8">
+        <div class="p-6 md:p-8 rounded-2xl shadow-md space-y-6 bg-white border border-neutral-200">
+          <div class="flex items-center space-x-3 border-b pb-4">
+            <i data-lucide="compass" class="h-8 w-8 text-borgona"></i>
+            <div>
+              <h2 class="text-2xl font-bold tracking-tight">3. Recorrido Geográfico y Ubicación</h2>
+              <p class="text-sm text-neutral-500">Traza oficial de la Ruta Nacional 7 Mendoza ↔ Ciudad Universitaria (CABA)</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between border-l-4 border-rose-600 pl-3 py-1 gap-2">
+              <div>
+                <span class="block text-[10px] font-bold text-neutral-400 uppercase tracking-widest">DIRECCIÓN DE LLEGADA EN BUENOS AIRES:</span>
+                <strong class="text-base text-neutral-900 block">Av. Intendente Güiraldes 2160, Pabellones I, II y III</strong>
+                <span class="text-xs text-neutral-500">Barrio de Núñez, zona norte de la Ciudad de Buenos Aires</span>
+              </div>
+              <div class="text-right">
+                <span class="inline-block bg-[#722F37] text-white text-xs px-3 py-1 rounded-full font-bold">Ruta Nacional 7</span>
+              </div>
+            </div>
+
+            <!-- MAPA RECREADO GEOGRÁFICAMENTE CON SVG (Basado en image_d91489) -->
+            <div class="border rounded-2xl p-5 bg-slate-50 border-neutral-200 space-y-4" id="map-inner-container">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-black uppercase tracking-wider text-borgona">Visualización de Tránsito en Tiempo Real</span>
+                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-bold">Mapa GPS</span>
+              </div>
+              
+              <!-- SVG GEOGRÁFICO -->
+              <div class="bg-[#c2e2cc] rounded-xl border border-neutral-200 p-1 shadow-inner relative overflow-hidden">
+                <svg viewBox="0 0 900 450" class="w-full h-auto">
+                  <path d="M 50 50 L 300 30 L 450 150 L 300 420 L 50 400 Z" fill="#b9dfc4" opacity="0.6" /> 
+                  <path d="M 300 30 L 650 10 L 720 220 L 550 420 L 300 420 Z" fill="#b1dbbc" opacity="0.6" /> 
+                  <path d="M 650 10 L 900 10 L 900 320 L 720 320 L 720 220 Z" fill="#a7d6b3" opacity="0.5" /> 
+                  <path d="M 550 420 L 720 220 L 900 320 L 900 450 L 550 450 Z" fill="#add9b9" opacity="0.8" /> 
+                  
+                  <path d="M 720 220 C 760 220, 800 230, 830 250 L 900 250 L 900 450 L 850 450 C 800 410, 750 350, 720 320 Z" fill="#8cbde0" />
+                  <text x="820" y="300" class="text-[10px] font-bold fill-sky-850/60 transform rotate-12">Río de la Plata</text>
+                  <path d="M 450 100 Q 500 150 580 180 Q 650 200 720 220" fill="none" stroke="#8cbde0" stroke-width="4" opacity="0.6" />
+
+                  <path d="M 220 50 L 220 420" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7" /> 
+                  <path d="M 380 30 L 380 430" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7" /> 
+                  <path d="M 560 30 L 560 440" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7" /> 
+                  <path d="M 690 100 L 690 440" stroke="#FFFFFF" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7" /> 
+
+                  <text x="140" y="320" class="text-xs font-black fill-[#3a6845]/30 tracking-widest uppercase">Mendoza</text>
+                  <text x="300" y="280" class="text-xs font-black fill-[#3a6845]/30 tracking-widest uppercase">San Luis</text>
+                  <text x="470" y="140" class="text-xs font-black fill-[#3a6845]/30 tracking-widest uppercase">Córdoba</text>
+                  <text x="630" y="100" class="text-xs font-black fill-[#3a6845]/30 tracking-widest uppercase">Santa Fe</text>
+                  <text x="690" y="380" class="text-xs font-black fill-[#3a6845]/30 tracking-widest uppercase text-center">Provincia de Buenos Aires</text>
+
+                  <!-- RUTA ALTERNATIVA (14h 17m) -->
+                  <path d="M 160 210 Q 230 110, 310 120 T 430 180 T 590 150 T 670 170 T 730 230" fill="none" stroke="#5b57d6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+                  <path d="M 160 210 Q 230 110, 310 120 T 430 180 T 590 150 T 670 170 T 730 230" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+
+                  <!-- RUTA PRINCIPAL (11h 49m) -->
+                  <path d="M 160 210 L 320 220 L 400 235 L 520 235 L 610 245 L 690 238 L 730 230" fill="none" stroke="#1d27db" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M 160 210 L 320 220 L 400 235 L 520 235 L 610 245 L 690 238 L 730 230" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="animate-pulse" />
+
+                  <!-- Nodos -->
+                  <circle cx="160" cy="210" r="10" fill="#FFFFFF" stroke="#333333" stroke-width="2" />
+                  <circle cx="160" cy="210" r="5" fill="#722F37" />
+                  <circle cx="320" cy="220" r="4" fill="#FFFFFF" stroke="#1d27db" stroke-width="2" />
+                  <circle cx="400" cy="235" r="4" fill="#FFFFFF" stroke="#1d27db" stroke-width="2" />
+                  <circle cx="610" cy="245" r="4" fill="#FFFFFF" stroke="#1d27db" stroke-width="2" />
+
+                  <!-- Arribo -->
+                  <circle cx="730" cy="230" r="12" fill="#ef4444" fill-opacity="0.25" class="animate-ping" />
+                  <circle cx="730" cy="230" r="8" fill="#ef4444" stroke="#FFFFFF" stroke-width="1.5" />
+                  
+                  <text x="160" y="235" text-anchor="middle" class="text-[11px] font-black fill-neutral-800">Mendoza</text>
+                  <text x="320" y="240" text-anchor="middle" class="text-[10px] font-bold fill-neutral-700">San Luis</text>
+                  <text x="400" y="255" text-anchor="middle" class="text-[10px] font-bold fill-neutral-700">Villa Mercedes</text>
+                  <text x="610" y="265" text-anchor="middle" class="text-[10px] font-bold fill-neutral-700">Junín</text>
+                  <text x="742" y="222" text-anchor="start" class="text-[11px] font-black fill-red-600 bg-white">Ciudad Universitaria</text>
+                  <text x="742" y="234" text-anchor="start" class="text-[9px] font-bold fill-neutral-600">Bs. As.</text>
+
+                  <!-- Globos de tiempo -->
+                  <g transform="translate(230, 60)">
+                    <rect x="1" y="1" width="125" height="36" rx="6" fill="#000000" opacity="0.15" />
+                    <rect width="125" height="36" rx="6" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1" />
+                    <text x="14" y="22" class="text-[10px] font-black fill-[#4d7c0f]">⏱ 14 h 17 min</text>
+                    <text x="14" y="31" class="text-[9px] font-bold fill-neutral-500">1.217 km (Alternativa)</text>
+                  </g>
+
+                  <g transform="translate(480, 270)">
+                    <rect x="1" y="1" width="125" height="36" rx="6" fill="#000000" opacity="0.15" />
+                    <rect width="125" height="36" rx="6" fill="#FFFFFF" stroke="#1d27db" stroke-width="1.5" />
+                    <text x="14" y="22" class="text-[10px] font-black fill-[#4d7c0f]">⏱ 11 h 49 min</text>
+                    <text x="14" y="31" class="text-[9px] font-black fill-neutral-800">1.085 km (Ruta 7)</text>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Referencias -->
+              <div class="flex flex-wrap justify-between items-center text-xs text-neutral-500 pt-2 gap-2">
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center gap-1.5">
+                    <span class="inline-block w-4 h-2 bg-blue-500 rounded"></span>
+                    Ruta Principal (RN 7) - 11h 49m
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <span class="inline-block w-4 h-2 bg-violet-400 rounded"></span>
+                    Ruta Alternativa Norte - 14h 17m
+                  </span>
+                </div>
+                <span class="italic">Visualización basada en el itinerario de tránsito federal TIM</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-cordillera text-white py-12 transition-all-custom" id="main-footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-zinc-800 pb-8">
+        <div class="space-y-3">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="bus" class="h-6 w-6 text-rose-500"></i>
+            <span class="text-2xl font-black">TIM</span>
+          </div>
+          <p class="text-xs text-neutral-400">Terminal Inteligente de Mendoza. Sistema Integrado de Conectividad Nacional y Universitaria.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase tracking-wider text-rose-400 mb-4">Líneas de Servicio</h4>
+          <ul class="space-y-2 text-xs text-neutral-400">
+            <li>Línea 1: Larga Distancia</li>
+            <li>Línea 2: Alta Montaña</li>
+            <li>Línea 3: Ruta del Vino</li>
+            <li class="text-white font-semibold">Línea 5: Universitario (CABA)</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase tracking-wider text-rose-400 mb-4">Ubicación</h4>
+          <p class="text-xs text-neutral-400">Juan B. Alberdi s/n, Guaymallén, Mendoza, Argentina.</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm uppercase tracking-wider text-rose-400 mb-4">Desarrollo</h4>
+          <p class="text-xs text-neutral-400">Nexo Studio — UADE 2026.</p>
+        </div>
+      </div>
+      <div class="pt-8 text-xs text-neutral-500 flex justify-between">
+        <p>© 2026 Terminal Inteligente de Mendoza (TIM).</p>
+        <p>Normas WCAG 2.1 AA</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let isHighContrast = false;
+    let isLargeFont = false;
+
+    function toggleHighContrast() {
+      isHighContrast = !isHighContrast;
+      const body = document.getElementById('body-container');
+      const btn = document.getElementById('btn-contrast');
+      if (isHighContrast) {
+        body.classList.add('high-contrast');
+        btn.innerText = "Normalizar Contraste";
+      } else {
+        body.classList.remove('high-contrast');
+        btn.innerText = "Alto Contraste ◑";
+      }
+    }
+
+    function toggleFontSize() {
+      isLargeFont = !isLargeFont;
+      const body = document.getElementById('body-container');
+      const btn = document.getElementById('btn-fontsize');
+      if (isLargeFont) {
+        body.classList.add('text-lg');
+        body.classList.remove('text-base');
+        btn.innerText = "Texto Normal";
+      } else {
+        body.classList.add('text-base');
+        body.classList.remove('text-lg');
+        btn.innerText = "Texto Grande A+";
+      }
+    }
+
+    window.onload = function() {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
