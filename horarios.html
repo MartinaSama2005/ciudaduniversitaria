@@ -204,6 +204,53 @@
               * Los horarios de arribo previstos en Ciudad Universitaria son estimaciones sujetas al tráfico en el ingreso a la Capital Federal.
             </p>
           </div>
+
+          <div class="p-6 rounded-2xl border border-borgona bg-borgona/10 mt-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+              <div>
+                <h3 class="text-2xl font-bold text-borgona">Reserva tu viaje aquí</h3>
+                <p class="text-sm text-neutral-700">Completa tus datos para reservar tu lugar.</p>
+              </div>
+              <span class="text-xs uppercase font-bold text-white bg-borgona px-3 py-1 rounded-full">Reserva</span>
+            </div>
+
+            <form class="space-y-4" action="#" method="post">
+              <div>
+                <label for="reserva-nombre" class="block text-sm font-semibold text-neutral-900 mb-1">Nombre y Apellido</label>
+                <input id="reserva-nombre" name="nombre_apellido" type="text" placeholder="Ej. Martina Sosa" class="w-full rounded-xl border border-borgona bg-white px-4 py-3 text-sm text-neutral-900 outline-none focus:border-borgona focus:ring-2 focus:ring-borgona/20" required>
+              </div>
+
+              <div>
+                <label for="reserva-email" class="block text-sm font-semibold text-neutral-900 mb-1">Correo electrónico</label>
+                <input id="reserva-email" name="correo_electronico" type="email" placeholder="correo@ejemplo.com" class="w-full rounded-xl border border-borgona bg-white px-4 py-3 text-sm text-neutral-900 outline-none focus:border-borgona focus:ring-2 focus:ring-borgona/20" required>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label for="reserva-pasajeros" class="block text-sm font-semibold text-neutral-900 mb-1">Cantidad de pasajeros</label>
+                  <select id="reserva-pasajeros" name="cantidad_pasajeros" class="w-full rounded-xl border border-borgona bg-white px-4 py-3 text-sm text-neutral-900 outline-none focus:border-borgona focus:ring-2 focus:ring-borgona/20" required>
+                    <option value="1">1 pasajero</option>
+                    <option value="2">2 pasajeros</option>
+                    <option value="3">3 pasajeros</option>
+                    <option value="4">4 pasajeros</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="reserva-horario" class="block text-sm font-semibold text-neutral-900 mb-1">Horario de salida</label>
+                  <select id="reserva-horario" name="horario_salida" class="w-full rounded-xl border border-borgona bg-white px-4 py-3 text-sm text-neutral-900 outline-none focus:border-borgona focus:ring-2 focus:ring-borgona/20" required>
+                    <option value="00:00">00:00hs</option>
+                    <option value="05:00">05:00hs</option>
+                    <option value="10:00">10:00hs</option>
+                    <option value="15:00">15:00hs</option>
+                    <option value="20:00">20:00hs</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="w-full bg-borgona hover:bg-borgona-dark text-white font-bold py-3 rounded-xl transition-all">Reservar viaje</button>
+            </form>
+          </div>
+
         </div>
       </div>
 
